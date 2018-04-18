@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`aa 1`] = `
+<div
+  className=""
+>
+  <h1>
+    Hello 
+    
+  </h1>
+  <input
+    onChange={[Function]}
+    value=""
+  />
+  <button
+    onClick={[Function]}
+  >
+    送信
+  </button>
+</div>
+`;
