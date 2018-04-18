@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App, Title, Input, Button } from './App';
 
-import  { shallow } from 'enzyme';
+import  { shallow, mount } from 'enzyme';
 
 
 describe('<App />', () => {
@@ -30,10 +30,10 @@ describe('<Input />', () => {
   });
 
   it('', () => {
-    const handleChange = jest.fn();
     const wrapper = shallow(<Input />);
+    const handleChange = jest.spyOn(Input.prototype, 'handleChange');
     const event = { target: { value: 'aaa' } };
     wrapper.find('input').simulate('change', event);
-    expect(handleChange.mock.calls.length).toBe(1);
+    expect(handleChange).toHaveBeenCalled();
   });
 });
