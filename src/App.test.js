@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App, Title, Input, Button } from './App';
+import  { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-import  { shallow, mount } from 'enzyme';
 
 /**
  * Appコンポーネントのテスト
@@ -10,20 +10,20 @@ import  { shallow, mount } from 'enzyme';
 describe('<App />', () => {
   const wrapper = shallow(<App />);
 
-  test('子コンポーネントの存在確認', () => {
+  it('子コンポーネントが存在すること', () => {
     expect(wrapper.find(Title).length).toBe(1);
     expect(wrapper.find(Input).length).toBe(1);
     expect(wrapper.find(Button).length).toBe(1);
   });
 
-  test('setStateでthis.state.textを更新した時のclass名', () => {
+  it('this.state.textを更新した時にclass名に反映されること', () => {
     wrapper.setState({
       text: 'XXX',
     });
     expect(wrapper.find('.XXX').length).toBe(1);
   });
 
-  test('handleChangeの呼び出し', () => {
+  it('handleChangeを呼び出すと、setStateが呼び出されること', () => {
     const setStateSpy = jest.spyOn(App.prototype, 'setState');
     wrapper.instance().handleChange('XXX');
     expect(setStateSpy).toHaveBeenCalledWith({
@@ -31,7 +31,7 @@ describe('<App />', () => {
     });
   });
 
-  test('handleClickの呼び出し', () => {
+  it('handleClickを呼び出すと、setStateが呼び出されること', () => {
     const setStateSpy = jest.spyOn(App.prototype, 'setState');
     wrapper.setState({
       text: 'XXX',
@@ -43,7 +43,7 @@ describe('<App />', () => {
     });
   });
 
-  test('スナップショット', () => {
+  test('<App />のスナップショット', () => {
     const tree = renderer
       .create(<App />)
       .toJSON();
@@ -55,19 +55,19 @@ describe('<App />', () => {
  * Titleコンポーネントのテスト
  */
 describe('<Title />', () => {
-  test('h1要素の存在確認', () => {
+  it('h1要素が存在すること', () => {
     const wrapper = shallow(<Title text={'React'} />);
     expect(wrapper.find('h1').length).toBe(1);
   });
 
-  test('propsの値', () => {
+  it('受け取ったpropsの値を表示すること', () => {
     const wrapper = shallow(<Title text={'React'} />);
     expect(wrapper.text()).toBe('Hello React');
     wrapper.setProps({ text: 'World' });
     expect(wrapper.text()).toBe('Hello World');
   });
 
-  test('スナップショット', () => {
+  test('<Title />のスナップショット', () => {
     const tree = renderer
       .create(<Title text={'React'} />)
       .toJSON();
@@ -79,21 +79,21 @@ describe('<Title />', () => {
  * Inputコンポーネントのテスト
  */
 describe('<Input />', () => {
-  test('input要素の存在確認', () => {
+   it('input要素が存在すること', () => {
     const wrapper = shallow(<Input />);
     expect(wrapper.find('input').length).toBe(1);
   });
 
-  test('changeイベント発火時のコールバック関数の呼び出し', () => {
+  it('changeイベント発火時にコールバック関数が呼び出されること', () => {
     const handleChangeSpy = jest.fn();
-    const wrapper = mount(<Input handleChange={handleChangeSpy} />);
+    const wrapper = shallow(<Input handleChange={handleChangeSpy} />);
 
     const event = { target: { value: 'aaa' } };
     wrapper.find('input').simulate('change', event);
     expect(handleChangeSpy).toHaveBeenCalledWith('aaa');
   });
 
-  test('スナップショット', () => {
+  test('<Input />のスナップショット', () => {
     const handleChangeSpy = jest.fn();
     const value = 'XXX';
     const tree = renderer
@@ -107,19 +107,19 @@ describe('<Input />', () => {
  * Buttonコンポーネントのテスト
  */
 describe('<Button />', () => {
-  test('要素の存在', () => {
+  it('button要素が存在すること', () => {
     const wrapper = shallow(<Button />);
     expect(wrapper.find('button').length).toBe(1);
   });
   
-  test('clickイベント発火時のコールバック関数の呼び出し', () => {
+  it('clickイベント発火時にコールバック関数が呼び出されること', () => {
     const handleClickSpy = jest.fn();
     const wrapper = shallow(<Button handleClick={handleClickSpy} />);
     wrapper.find('button').simulate('click');
     expect(handleClickSpy).toHaveBeenCalled();
   });
 
-  test('スナップショット', () => {
+  test('<Button />のスナップショット', () => {
     const handleClickSpy = jest.fn();
     const tree = renderer
       .create(<Button handleClick={handleClickSpy} />)

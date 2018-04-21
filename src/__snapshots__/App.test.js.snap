@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> スナップショット 1`] = `
+exports[`<App /> <App />のスナップショット 1`] = `
 <div
   className=""
 >
@@ -20,7 +20,7 @@ exports[`<App /> スナップショット 1`] = `
 </div>
 `;
 
-exports[`<Button /> スナップショット 1`] = `
+exports[`<Button /> <Button />のスナップショット 1`] = `
 <button
   onClick={[Function]}
 >
@@ -28,14 +28,14 @@ exports[`<Button /> スナップショット 1`] = `
 </button>
 `;
 
-exports[`<Input /> スナップショット 1`] = `
+exports[`<Input /> <Input />のスナップショット 1`] = `
 <input
   onChange={[Function]}
   value="XXX"
 />
 `;
 
-exports[`<Title /> スナップショット 1`] = `
+exports[`<Title /> <Title />のスナップショット 1`] = `
 <h1>
   Hello 
   React
