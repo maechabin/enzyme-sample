@@ -8,37 +8,39 @@ import renderer from 'react-test-renderer';
  * Appコンポーネントのテスト
  */
 describe('<App />', () => {
-  const wrapper = shallow(<App />);
-
   it('子コンポーネントが存在すること', () => {
+    const wrapper = shallow(<App />);
     expect(wrapper.find(Title).length).toBe(1);
     expect(wrapper.find(Input).length).toBe(1);
     expect(wrapper.find(Button).length).toBe(1);
   });
 
   it('this.state.textを更新した時にclass名に反映されること', () => {
+    const wrapper = shallow(<App />);
     wrapper.setState({
-      text: 'XXX',
+      text: 'AAA',
     });
-    expect(wrapper.find('.XXX').length).toBe(1);
+    expect(wrapper.find('.AAA').length).toBe(1);
   });
 
   it('handleChangeを呼び出すと、setStateが呼び出されること', () => {
+    const wrapper = shallow(<App />);
     const setStateSpy = jest.spyOn(App.prototype, 'setState');
-    wrapper.instance().handleChange('XXX');
+    wrapper.instance().handleChange('BBB');
     expect(setStateSpy).toHaveBeenCalledWith({
-      inputValue: 'XXX',
+      inputValue: 'BBB',
     });
   });
 
   it('handleClickを呼び出すと、setStateが呼び出されること', () => {
+    const wrapper = shallow(<App />);
     const setStateSpy = jest.spyOn(App.prototype, 'setState');
     wrapper.setState({
-      text: 'XXX',
+      inputValue: 'CCC',
     });
     wrapper.instance().handleClick();
     expect(setStateSpy).toHaveBeenCalledWith({
-      text: 'XXX',
+      text: 'CCC',
       inputValue: '',
     });
   });
